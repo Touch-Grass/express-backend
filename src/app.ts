@@ -6,6 +6,7 @@ e;
 //^^ placeholder for require() imports
 
 import express from 'express';
+import passport from 'passport';
 export const app = express();
 export const port = process.env.PORT || 8080;
 
@@ -19,3 +20,5 @@ app.use(
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());

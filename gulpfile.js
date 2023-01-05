@@ -15,13 +15,15 @@ const matchExportDefault = new RegExp(/export default /gim);
 const matchImports = new RegExp(/import[ ]?[{]?[A-Za-z0-9_.,$ ]*[}]?[ ]?from[ ]?["'][A-Za-z0-9_.\/-]*["'];/gim);
 const matchRequire = new RegExp(/const e[ ]?=[ ]?["']express["'];[\n]?e;/gm);
 
-const tsFiles = ['src/app.ts', 'src/pages/*.ts', 'src/**/*.ts', 'src/pages/error.ts'];
+const tsFiles = ['src/app.ts', 'src/Models/*.ts', 'src/pages/!(error)*.ts', 'src/**/*.ts', 'src/pages/error.ts'];
 const nodeRequires = `const express=require("express");
         const bodyParser=require("body-parser");
         const cors=require("cors");
         const passport=require("passport");
         const LocalStrategy=require("passport-local");
-        const session=require("express-session");`
+        const session=require("express-session");
+        const mongoose=require("mongoose");
+        const bcrypt=require("bcryptjs");`
   .replace(/\n/g, '')
   .replace(/\B\s+|\s+\B/gm, '');
 
