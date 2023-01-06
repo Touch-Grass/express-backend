@@ -4,7 +4,6 @@ import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { IUser, userSchema } from '../Models/user';
 import bcrypt from 'bcryptjs';
-bcrypt;
 
 export const loginRouter = express.Router();
 
