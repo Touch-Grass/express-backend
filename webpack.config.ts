@@ -1,40 +1,61 @@
 import path from 'path';
-
-// import DeclarationBundlerPlugin from 'declaration-bundler-webpack-plugin';
+import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 
-module.exports = {
-  entry: {
-    mylib: path.resolve(__dirname, 'src/main.ts')
-  },
+import nodeExternals from 'webpack-node-externals';
+// import DeclarationBundlerPlugin from 'declaration-bundler-webpack-plugin';
+
+const config: webpack.Configuration = {
+  // entry: {
+  //   mylib: path.resolve(__dirname, 'hello.ts')
+  // },
+  mode: 'development',
+
+  target: 'node',
+  externals: [nodeExternals()],
+
+  entry: path.resolve(__dirname, 'src/main.ts'),
   module: {
     rules: [
       {
-        // test: /^((?!d).)ts$/gm,
-        test: /\.ts$/gm,
-        exclude: [/node_modules/],
-        loader: 'ts-loader'
+        test: /\.ts$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/
       }
     ]
   },
 
-  mode: 'production',
+  resolve: {
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
+    mainFields: ['browser', 'module', 'main'],
+    symlinks: false,
+    fallback: {
+      crypto: false,
+      fs: false,
+      path: false,
+      stream: false,
+      util: false,
+      zlib: false,
+      url: false,
+      querystring: false,
+      http: false,
+      async_hooks: false
+    }
+  },
 
-  resolve: { extensions: ['.ts'] },
   output: {
     chunkFilename: '[name].js',
     filename: '[name].js',
     clean: true
   },
 
+  node: false,
+
   plugins: [
-    // new DeclarationBundlerPlugin({
-    //   moduleName: '"mylib"',
-    //   out: '@types/index.d.ts'
-    // }),
+    // new DeclarationBundlerPlugin({ moduleName: 'mylib', out: '@types/index.d.ts' }),
     new CopyWebpackPlugin({
-      patterns: [{ from: 'backend/package.json', to: 'backend/dist/package.json' }]
+      patterns: [{ from: './package.json', to: './package.json' }]
     })
   ],
   optimization: {
@@ -56,3 +77,5 @@ module.exports = {
     }
   }
 };
+
+export default config;

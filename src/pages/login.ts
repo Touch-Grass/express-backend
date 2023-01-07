@@ -1,9 +1,10 @@
-import express from 'express';
-import mongoose from 'mongoose';
+import express from '../../node_modules/@types/express/index';
+
 import passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
+import mongoose from 'mongoose';
+// import { Strategy as LocalStrategy } from 'passport-local';
 import { IUser, userSchema } from '../Models/user';
-import bcrypt from 'bcryptjs';
+// import bcrypt from 'bcryptjs';
 
 export const loginRouter = express.Router();
 
@@ -22,34 +23,34 @@ loginRouter.get('/', (req, res) => {
 
 // Configure the local authentication strategy
 
-passport.use(
-  new LocalStrategy((username, password, done) => {
-    // Find the user with the given username
-    User.findOne({ username: username }, (err: any, user: IUser) => {
-      // If there is an error, return done with the error
-      if (err) {
-        return done(err);
-      }
-      // If no user is found, return done with a message
-      if (!user) {
-        return done(null, false, { message: 'Incorrect username or password.' });
-      }
-      // Compare the passwords to see if they match
-      bcrypt.compare(password, user.password, (err, isMatch) => {
-        // If there is an error, return done with the error
-        if (err) {
-          return done(err);
-        }
-        // If the passwords do not match, return done with a message
-        if (!isMatch) {
-          return done(null, false, { message: 'Incorrect password.' });
-        }
-        // If the passwords match, return done with the user
-        return done(null, user);
-      });
-    });
-  })
-);
+// passport.use(
+//   new LocalStrategy((username, password, done) => {
+//     // Find the user with the given username
+//     User.findOne({ username: username }, (err: any, user: IUser) => {
+//       // If there is an error, return done with the error
+//       if (err) {
+//         return done(err);
+//       }
+//       // If no user is found, return done with a message
+//       if (!user) {
+//         return done(null, false, { message: 'Incorrect username or password.' });
+//       }
+//       // Compare the passwords to see if they match
+//       bcrypt.compare(password, user.password, (err, isMatch) => {
+//         // If there is an error, return done with the error
+//         if (err) {
+//           return done(err);
+//         }
+//         // If the passwords do not match, return done with a message
+//         if (!isMatch) {
+//           return done(null, false, { message: 'Incorrect password.' });
+//         }
+//         // If the passwords match, return done with the user
+//         return done(null, user);
+//       });
+//     });
+//   })
+// );
 
 // Set up the login route
 loginRouter.post('/login', (_req, res, _next) => {
