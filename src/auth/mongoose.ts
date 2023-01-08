@@ -6,11 +6,11 @@ const db = mongoose.connection;
 
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', () => {
-  console.log('Connected to MongoDB');
+    console.log('Connected to MongoDB');
 });
 
 if (db.readyState === 1) {
-  console.log('MongoDB connection is open');
+    console.log('MongoDB connection is open');
 } else {
-  console.log('MongoDB connection is closed');
+    console.log('MongoDB connection is closed');
 }

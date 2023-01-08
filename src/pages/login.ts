@@ -1,4 +1,4 @@
-import express from '../../node_modules/@types/express/index';
+import express from 'express';
 
 import passport from 'passport';
 import mongoose from 'mongoose';
@@ -11,8 +11,8 @@ export const loginRouter = express.Router();
 const User = mongoose.model('userSchema', userSchema);
 
 loginRouter.get('/', (req, res) => {
-  if (req.isAuthenticated()) res.send({ message: `${req.user} already logged in`, status: 200 });
-  else res.json({ message: 'Not logged in! Please login', status: 401 });
+    if (req.isAuthenticated()) res.send({ message: `${req.user} already logged in`, status: 200 });
+    else res.json({ message: 'Not logged in! Please login', status: 401 });
 });
 
 // loginRouter.post('/', (req, res) => {
@@ -54,14 +54,14 @@ loginRouter.get('/', (req, res) => {
 
 // Set up the login route
 loginRouter.post('/login', (_req, res, _next) => {
-  //   passport.authenticate('local', (err, user, info) => {
-  //     if (err) return next(err);
-  //     if (!user) return res.send({ message: info.message, status: 401 });
+    //   passport.authenticate('local', (err, user, info) => {
+    //     if (err) return next(err);
+    //     if (!user) return res.send({ message: info.message, status: 401 });
 
-  //     req.logIn(user, err => {
-  //       if (err) return next(err);
-  //       return res.send('Logged in');
-  //     });
-  //   })(req, res, next);
-  res.send('Logged in');
+    //     req.logIn(user, err => {
+    //       if (err) return next(err);
+    //       return res.send('Logged in');
+    //     });
+    //   })(req, res, next);
+    res.send('Logged in');
 });

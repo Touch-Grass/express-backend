@@ -9,11 +9,11 @@ export const app = express();
 export const port = process.env.PORT || 8080;
 
 app.use(
-  session({
-    secret: 'abdofjadfjaofijdsoafaiosdjf',
-    resave: false,
-    saveUninitialized: false
-  })
+    session({
+        secret: 'abdofjadfjaofijdsoafaiosdjf',
+        resave: false,
+        saveUninitialized: false
+    })
 );
 
 app.use(cors());
