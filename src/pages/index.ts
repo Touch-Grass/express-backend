@@ -4,12 +4,12 @@ import express from 'express';
 export const indexRouter = express.Router();
 
 indexRouter.get('/', (_, res) => {
+    console.log('got request', res, res.locals);
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.json({ message: 'hello, world' });
+    res.json({ message: 'HI' });
 });
 
 indexRouter.post('/', (req, res) => {
-    console.log('got request', req.body);
     res.setHeader('Access-Control-Request-Headers', '*');
-    res.json({ message: 'Hi', body: req.body });
+    res.json({ message: 'HI', body: req.body });
 });

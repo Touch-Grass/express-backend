@@ -3,7 +3,7 @@ import { src } from 'gulp';
 import gulp from 'gulp';
 import { default as WB } from 'webpack-stream';
 
-const gulpESLintNew = require('gulp-eslint-new');
+const gulpESLintNew  = require('gulp-eslint-new');
 
 const webpack = () =>
     gulp
